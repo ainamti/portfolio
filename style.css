@@ -5,3 +5,22 @@ body {
   font: 100%/1.5 system-ui;
   margin-inline: max(1em, (100% - 100ch) / 2);
 }
+
+nav {
+    display: flex;
+}
+
+nav a {
+    flex: 1;
+    text-align: center;       /* center the text inside each link */
+    padding: 10px 0;          /* optional: vertical padding */
+    text-decoration: none;
+    color: black;
+    border: 1px solid #ccc;   /* optional: to see the boundaries */
+}
+
+/* Style the current page differently */
+nav a.current {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
