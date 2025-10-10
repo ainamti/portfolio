@@ -4,26 +4,27 @@ body {
 	 */
   font: 100%/1.5 system-ui;
   margin-inline: max(1em, (100% - 100ch) / 2);
+}
 
-  nav {
-    display: flex;                  /* Flexbox layout */
-    margin-bottom: 1em;             /* Space between nav and content */
-    border-bottom: 1px solid oklch(80% 3% 200);  /* Subtle bottom border */
+/* ===== Nav container ===== */
+nav {
+    display: flex;                  
+    margin-bottom: 1em;             
+    border-bottom: 1px solid oklch(80% 3% 200);  
 }
 
 /* ===== Nav links ===== */
 nav a {
-    flex: 1;                        /* Equal width for all links */
-    text-align: center;             /* Center text in each link box */
-    text-decoration: none;          /* Remove underline */
-    color: inherit;                 /* Inherit parent text color */
-    padding: 0.5em 0;               /* Add vertical spacing */
+    flex: 1;                        
+    text-align: center;             
+    text-decoration: none;          
+    color: inherit;                 
+    padding: 0.5em 0;               
 }
 
 /* ===== Current page link ===== */
 nav a.current {
-    border-bottom: 0.4em solid oklch(85% 3% 200); /* Thick bottom border for current page */
-    padding-bottom: 0.1em;           /* Reduce padding to counter added border height */
-}
+    border-bottom: 0.4em solid oklch(85% 3% 200); 
+    padding-bottom: 0.1em;          
 }
 
