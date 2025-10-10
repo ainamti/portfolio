@@ -7,20 +7,22 @@ body {
 }
 
 nav {
-    display: flex;
+    display: flex;                  /* Flexbox layout */
+    margin-bottom: 1em;             /* Space between nav and content */
+    border-bottom: 1px solid oklch(80% 3% 200);  /* Subtle bottom border */
 }
 
+/* ===== Nav links ===== */
 nav a {
-    flex: 1;
-    text-align: center;       /* center the text inside each link */
-    padding: 10px 0;          /* optional: vertical padding */
-    text-decoration: none;
-    color: black;
-    border: 1px solid #ccc;   /* optional: to see the boundaries */
+    flex: 1;                        /* Equal width for all links */
+    text-align: center;             /* Center text in each link box */
+    text-decoration: none;          /* Remove underline */
+    color: inherit;                 /* Inherit parent text color */
+    padding: 0.5em 0;               /* Add vertical spacing */
 }
 
-/* Style the current page differently */
+/* ===== Current page link ===== */
 nav a.current {
-    font-weight: bold;
-    background-color: #f0f0f0;
+    border-bottom: 0.4em solid oklch(85% 3% 200); /* Thick bottom border for current page */
+    padding-bottom: 0.1em;           /* Reduce padding to counter added border height */
 }
