@@ -8,10 +8,27 @@ body {
   color: black; 
 }
 
+form {
+  max-width: 40rem;           /* Keeps the form from getting too wide on big screens */
+  margin-inline: auto;         /* Centers the form horizontally */
+}
+
+label {
+  display: block;              /* Makes labels stack vertically */
+  margin-block: 0.5em 0.25em;  /* Adds space above and below each label */
+  font-weight: 500;            /* Optional: makes labels a bit bolder */
+}
+
 input,
 textarea,
 button {
-  font: inherit;
+  display: block;              /* Each control on its own line */
+  width: 100%;                 /* Take up full width of the form */
+  box-sizing: border-box;      /* Include padding & border in width calculation */
+  padding: 0.5em;              /* Add comfortable inner spacing */
+  font: inherit;               /* Match page font */
+  border: 1px solid oklch(80% 3% 200);  /* Subtle gray border */
+  border-radius: 0.25em;       /* Slightly rounded corners */
 }
 
 html {
