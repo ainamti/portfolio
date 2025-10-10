@@ -66,3 +66,7 @@ form button {
   grid-column: 1 / -1;   /* button spans both columns */
   justify-self: start;   /* aligns button to the left */
 }
+
+.form-row {
+  display: contents; /* allows label and input to participate in the form grid directly */
+}
