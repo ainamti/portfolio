@@ -67,6 +67,6 @@ form button {
   justify-self: start;   /* aligns button to the left */
 }
 
-.form-row {
-  display: contents; /* allows label and input to participate in the form grid directly */
+input, textarea, select {
+  grid-column: 2 / 3; /* forces inputs to always sit in column 2 */
 }
