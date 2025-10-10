@@ -6,6 +6,11 @@ body {
   margin-inline: max(1em, (100% - 100ch) / 2);
 }
 
+html {
+    --color-accent: oklch(65% 50% 0);   
+    accent-color: var(--color-accent);  
+}
+
 nav {
     display: flex;                  
     margin-bottom: 1em;             
