@@ -8,6 +8,12 @@ body {
   color: black; 
 }
 
+input,
+textarea,
+button {
+  font: inherit;
+}
+
 html {
   --color-accent: oklch(65% 50% 0);
   accent-color: var(--color-accent);
