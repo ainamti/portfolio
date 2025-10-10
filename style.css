@@ -10,6 +10,64 @@ body {
   color: black; 
 }
 
+/*Resume Page Specific Styling*/
+
+main {
+    max-width: 75ch; 
+    margin-inline: auto; 
+    padding-block: 2em;
+    background-color: white; 
+}
+
+main h1:first-of-type {
+    font-size: 250%; 
+    color: var(--color-accent); 
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.1em;
+    border-bottom: 3px solid var(--color-accent); 
+    line-height: 1.1;
+}
+
+/* Page title*/
+body > h1 {
+    font-size: 300%;
+    margin-top: 0;
+    margin-bottom: 1em;
+    text-align: center;
+}
+main section h2 {
+    font-size: 150%; 
+    color: black;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid oklch(80% 3% 200); 
+    padding-bottom: 0.2em;
+}
+
+article h3 {
+    font-size: 120%; 
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+    font-weight: bold;
+}
+
+article {
+    margin-bottom: 1.5em;
+    padding-left: 1em;
+    border-left: 3px solid oklch(90% 3% 200); 
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 1.5em; /* Tighter list indentation */
+    margin-top: 0.5em;
+}
+
+ul li {
+    margin-bottom: 0.5em;
+}
+
 /*Headings*/
 h1, h2, h3, h4, h5, h6 {
 line-height: 1.1;
