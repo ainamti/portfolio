@@ -4,9 +4,8 @@ body {
 	 */
   font: 100%/1.5 system-ui;
   margin-inline: max(1em, (100% - 100ch) / 2);
-}
 
-nav {
+  nav {
     display: flex;                  /* Flexbox layout */
     margin-bottom: 1em;             /* Space between nav and content */
     border-bottom: 1px solid oklch(80% 3% 200);  /* Subtle bottom border */
@@ -26,3 +25,5 @@ nav a.current {
     border-bottom: 0.4em solid oklch(85% 3% 200); /* Thick bottom border for current page */
     padding-bottom: 0.1em;           /* Reduce padding to counter added border height */
 }
+}
+
