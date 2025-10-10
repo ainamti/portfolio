@@ -18,22 +18,17 @@
   <h1>Contact</h1>
 
   <form action="mailto:foo@example.com" method="POST" enctype="text/plain">
-    <label>
-      Email:
-      <input name="email" type="email">
-    </label>
+    
+    <label for="email-input">Email:</label>
+    <input name="email" type="email" id="email-input">
 
-    <label>
-      Subject:
-      <input name="subject">
-    </label>
+    <label for="subject-input">Subject:</label>
+    <input name="subject" type="text" id="subject-input">
 
-    <label>
-      Body:
-      <textarea name="body"></textarea>
-    </label>
+    <label for="body-textarea">Body:</label>
+    <textarea name="body" id="body-textarea"></textarea>
 
     <button>Submit</button>
-  </form>
+</form>
 </body>
 </html>
