@@ -1,5 +1,6 @@
 :root {
   color-scheme: light dark;
+  --color-accent: oklch(65% 40% 250);
 }
 html {
   --color-accent: oklch(65% 50% 0);
@@ -7,10 +8,10 @@ html {
 }
 
 body {
+  background-color: Canvas;
+  color: CanvasText;
   font: 100%/1.5 system-ui;
-  margin-inline: max(1em, (100% - 100ch) / 2);
-  background-color: white;  
-  color: black; 
+  margin-inline: max(1em, (100% - 100ch) / 2); 
 }
 
 /*Resume Page Specific Styling*/
@@ -87,7 +88,10 @@ font-size: 400%;
 nav {
   display: flex;                  
   margin-bottom: 1em;             
-  border-bottom: 1px solid oklch(80% 3% 200);  
+  gap: 1em;
+  padding-block: 1em;
+  border-bottom: 1px solid var(--border-color);
+  --border-color: oklch(50% 10% 200 / 40%);
 }
 
 nav a {
@@ -106,7 +110,8 @@ nav a.current {
 nav a:hover {
   color: var(--color-accent);              
   border-bottom: 0.4em solid var(--color-accent);
-  background-color: oklch(from var(--color-accent) 95% 5% h);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+  border-radius: 6px;
 }
 
 /*Projects Grid*/
