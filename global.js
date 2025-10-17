@@ -4,6 +4,15 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
+// let currentLink = navLinks.find(
+//   (a) => a.host === location.host && a.pathname === location.pathname,
+// );
+// currentLink.classList.add('current');
+// if (currentLink) {
+//   // or if (currentLink !== undefined)
+//   currentLink.classList.add('current');
+// }
+
 // STEP 1: Define your pages
 let pages = [
   { url: '', title: 'Home' },
