@@ -19,8 +19,8 @@ let pages = [
   { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
   { url: 'resume/', title: 'Resume' },
-  { url: 'contact/', title: 'Contact' }
-  { url: 'https://github.com/ainamti', title: 'GitHub', external: true } // External link
+  { url: 'contact/', title: 'Contact' },
+  { url: 'https://github.com/ainamti', title: 'GitHub', external: true }
 ];
 
 // Create the <nav> element
