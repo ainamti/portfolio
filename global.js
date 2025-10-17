@@ -4,26 +4,30 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// 1. Define the BASE_PATH to fix the URL issue
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"                  // Local server: path is the root
-  : "/portfolio/";       // GitHub Pages: path includes the repository name
+ let currentLink = navLinks.find(
+   (a) => a.host === location.host && a.pathname === location.pathname,
+ );
+ currentLink.classList.add('current');
+ if (currentLink) {
+   // or if (currentLink !== undefined)
+   currentLink.classList.add('current');
+ }
 
-// 2. Define the navigation data structure
-// Use simple relative paths that rely on BASE_PATH for context
 let pages = [
-  { url: '', title: 'Home' }, // url: '' for the home page
+  { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
-  { url: 'contact/', title: 'Contact' },
-  { url: 'resume/', title: 'Resume' },
-  { url: 'https://github.com/ainamti', title: 'GitHub', external: true } // External link
+  // add the rest of your pages here
 ];
 
-// 3. Create and prepend the <nav> element
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
-// 4. Loop to create, correct, and insert links
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "/"                  // Local server
+  : "/portfolio/";         // GitHub Pages repo name
+
+url = !url.startsWith('http') ? BASE_PATH + url : url;
+
 for (let p of pages) {
   let url = p.url;
   let title = p.title;
@@ -51,4 +55,6 @@ for (let p of pages) {
 
   // C. Create and add the link to the nav element
   nav.insertAdjacentHTML('beforeend', `<a href="${url}"${targetAttribute}${classAttribute}>${title}</a>`);
+
+ 
 }
