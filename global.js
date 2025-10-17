@@ -4,21 +4,21 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-let currentLink = navLinks.find(
-  (a) => a.host === location.host && a.pathname === location.pathname,
-);
-currentLink.classList.add('current');
-if (currentLink) {
-  // or if (currentLink !== undefined)
-  currentLink.classList.add('current');
-}
+// let currentLink = navLinks.find(
+//   (a) => a.host === location.host && a.pathname === location.pathname,
+// );
+// currentLink.classList.add('current');
+// if (currentLink) {
+//   // or if (currentLink !== undefined)
+//   currentLink.classList.add('current');
+// }
 
 // --- Step 3.1: Create nav and pages array ---
 
 let pages = [
   { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
-  { url: 'resume/', title: 'About' },
+  { url: 'resume/', title: 'Resume' },
   { url: 'contact/', title: 'Contact' }
   // add more pages as needed
 ];
