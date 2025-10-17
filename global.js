@@ -1,37 +1,54 @@
-console.log('IT’S ALIVE!');
+onsole.log('IT’S ALIVE!');
 
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// const navLinks = $$("nav a");
-
-// let currentLink = navLinks.find(
-//   (a) => a.host === location.host && a.pathname === location.pathname,
-// );
-
-// currentLink?.classList.add('current');
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "/"                  
+  : "/portfolio/";      
 
 let pages = [
-  { url: '', title: 'Home' },
+  { url: '', title: 'Home' }, // url: '' for the home page (which will resolve to BASE_PATH)
   { url: 'projects/', title: 'Projects' },
-  // add the rest of your pages here
+  { url: 'contact/', title: 'Contact' },
+  { url: 'resume/', title: 'Resume' },
+  // Use absolute URL for external links
+  { url: 'https://github.com/ainamti', title: 'GitHub', external: true }
 ];
 
+// 3. Create and prepend the <nav> element
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
+// 4. Loop to create and insert links (CORRECTED LOOP STRUCTURE)
 for (let p of pages) {
   let url = p.url;
   let title = p.title;
-  // next step: create link and add it to nav
-}
+  let classAttribute = ''; // Initialize class attribute string
 
-// Create link and add it to nav
-nav.insertAdjacentHTML('beforeend', `<a href="${url}">${title}</a>`);
-
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"                  // Local server
-  : "/website/";         // GitHub Pages repo name
+  // A. Handle absolute (external) vs. relative (internal) URLs
+  if (!url.startsWith('http')) {
+    // If relative, prefix with the appropriate BASE_PATH
+    url = BASE_PATH + url;
+  }
   
-  url = !url.startsWith('http') ? BASE_PATH + url : url;
+  // B. Logic to set the 'current' class
+  // 1. Create a temporary link element to resolve the URL
+  let tempLink = document.createElement('a');
+  tempLink.href = url;
+  
+  // 2. Check for the 'current' page link
+  // Note: tempLink.pathname will include the BASE_PATH if it's an internal link
+  if (tempLink.pathname === location.pathname) {
+    classAttribute = ' class="current"';
+  }
+
+  // C. Add target="_blank" for external links
+  if (p.external) {
+    classAttribute += ' target="_blank"';
+  }
+
+  // D. Create and add the link to the nav element
+  nav.insertAdjacentHTML('beforeend', `<a href="${url}"${classAttribute}>${title}</a>`);
+}
