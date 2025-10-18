@@ -4,6 +4,20 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
+document.body.insertAdjacentHTML(
+  'afterbegin',
+  `
+  <label class="color-scheme">
+    Theme:
+    <select id="theme-switcher">
+      <option value="light dark">Automatic</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+  `
+);
+
 // let currentLink = navLinks.find(
 //   (a) => a.host === location.host && a.pathname === location.pathname,
 // );
@@ -65,32 +79,25 @@ for (let p of pages) {
 
 }
 
-document.body.insertAdjacentHTML(
-  'afterbegin',
-  `
-  <label class="color-scheme">
-    Theme:
-    <select id="theme-switcher">
-      <option value="light dark">Automatic</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-  </label>
-  `
-);
-
-// Handle dropdown changes
 const select = document.getElementById('theme-switcher');
-select.addEventListener('change', () => {
-  document.documentElement.style.colorScheme = select.value;
-  localStorage.setItem('preferred-color-scheme', select.value);
-});
 
-// Restore user’s preference if they set one earlier
+// Apply saved preference from previous visits
 const saved = localStorage.getItem('preferred-color-scheme');
 if (saved) {
-  document.documentElement.style.colorScheme = saved;
+  document.documentElement.style.setProperty('color-scheme', saved);
   select.value = saved;
+} else {
+  document.documentElement.style.setProperty('color-scheme', 'light dark'); // default Automatic
 }
+
+// Listen for changes and update the color-scheme
+select.addEventListener('input', function(event) {
+  const value = event.target.value;
+  console.log('color scheme changed to', value);
+  document.documentElement.style.setProperty('color-scheme', value);
+  localStorage.setItem('preferred-color-scheme', value);
+});
+
+
 
 

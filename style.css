@@ -171,28 +171,16 @@ input, textarea, select {
   grid-column: 2 / 3; 
 }
 
+/* Step 4.3: Color scheme switcher positioning */
 .color-scheme {
-  position: fixed;
-  top: 1em;
-  right: 1em;
-  background-color: Canvas;
-  color: CanvasText;
-  border: 1px solid oklch(80% 3% 200 / 50%);
-  border-radius: 0.5em;
-  padding: 0.5em 0.8em;
-  font-size: 0.9em;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  box-shadow: 0 0 0.5em oklch(0% 0% 0% / 10%);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.8em;
+  font-family: inherit; 
   z-index: 1000;
 }
 
 .color-scheme select {
-  font: inherit;
-  border-radius: 0.3em;
-  border: 1px solid oklch(80% 3% 200 / 50%);
-  padding: 0.2em 0.4em;
-  background-color: Canvas;
-  color: CanvasText;
+  font: inherit; /* ensure the dropdown matches the site font */
 }
