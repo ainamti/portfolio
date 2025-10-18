@@ -62,5 +62,35 @@ for (let p of pages) {
 
   // Add the link to the navigation
   nav.append(a);
+
 }
+
+document.body.insertAdjacentHTML(
+  'afterbegin',
+  `
+  <label class="color-scheme">
+    Theme:
+    <select id="theme-switcher">
+      <option value="light dark">Automatic</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+  `
+);
+
+// Handle dropdown changes
+const select = document.getElementById('theme-switcher');
+select.addEventListener('change', () => {
+  document.documentElement.style.colorScheme = select.value;
+  localStorage.setItem('preferred-color-scheme', select.value);
+});
+
+// Restore user’s preference if they set one earlier
+const saved = localStorage.getItem('preferred-color-scheme');
+if (saved) {
+  document.documentElement.style.colorScheme = saved;
+  select.value = saved;
+}
+
 
