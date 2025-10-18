@@ -1,6 +1,6 @@
 :root {
   color-scheme: light dark;
-  --color-accent: oklch(65% 40% 250);
+  --color-accent: oklch(65% 50% 0);
 }
 html {
   --color-accent: oklch(65% 50% 0);
