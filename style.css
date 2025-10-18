@@ -11,7 +11,7 @@ body {
   background-color: Canvas;
   color: CanvasText;
   font: 100%/1.5 system-ui;
-  margin-inline: max(1em, (100% - 100ch) / 2); 
+  margin-inline: max(1em, (100% - 100ch) / 2);
 }
 
 /*Resume Page Specific Styling*/
@@ -20,7 +20,10 @@ main {
     max-width: 75ch; 
     margin-inline: auto; 
     padding-block: 2em;
-    background-color: white; 
+    background-color: Canvas;   
+    color: CanvasText;          
+    border-radius: 1em;         
+    box-shadow: 0 0 1em oklch(0% 0% 0% / 10%); 
 }
 
 main h1:first-of-type {
