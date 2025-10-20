@@ -27,7 +27,6 @@ document.body.insertAdjacentHTML(
 //   currentLink.classList.add('current');
 // }
 
-// STEP 1: Define your pages
 let pages = [
   { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
@@ -36,45 +35,37 @@ let pages = [
   { url: 'https://github.com/ainamti', title: 'GitHub', external: true },
 ];
 
-// STEP 2: Create <nav> element and prepend to <body>
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
-// STEP 3: Set base path depending on environment
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
-    ? "/" // Local server
-    : "/portfolio/"; // GitHub Pages repo name
+    ? "/" 
+    : "/portfolio/"; 
 
-// STEP 4: Loop through each page and create links
 for (let p of pages) {
   let url = p.url;
   let title = p.title;
 
-  // Add BASE_PATH to relative URLs
   if (!url.startsWith("http")) {
     url = BASE_PATH + url;
   }
 
-  // Create <a> element
   let a = document.createElement("a");
   a.href = url;
   a.textContent = title;
 
-  // Highlight current page
   a.classList.toggle(
     "current",
     a.host === location.host && a.pathname === location.pathname
   );
 
-  // Open external links (like GitHub) in new tab
   a.toggleAttribute("target", a.host !== location.host);
   if (a.host !== location.host) {
     a.target = "_blank";
-    a.rel = "noopener noreferrer"; // security best practice
+    a.rel = "noopener noreferrer"; 
   }
 
-  // Add the link to the navigation
   nav.append(a);
 
 }
@@ -87,7 +78,7 @@ if (saved) {
   document.documentElement.style.setProperty('color-scheme', saved);
   select.value = saved;
 } else {
-  document.documentElement.style.setProperty('color-scheme', 'light dark'); // default Automatic
+  document.documentElement.style.setProperty('color-scheme', 'light dark'); 
 }
 
 // Listen for changes and update the color-scheme
