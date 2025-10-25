@@ -118,6 +118,10 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   });
 }
 
+export async function fetchGithubData() {
+  console.log('fetchGithubData called — implement later');
+  return [];
+}
 
 
 
