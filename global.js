@@ -104,6 +104,37 @@ export async function fetchJSON(url) {
   }
 }
 
+// global.js (add below fetchJSON)
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  // Clear existing content
+  containerElement.innerHTML = '';
+
+  // Validate input
+  if (!Array.isArray(projects) || projects.length === 0) {
+    containerElement.innerHTML = '<p>No projects available.</p>';
+    return;
+  }
+
+  // Validate headingLevel
+  const validHeadings = ['h1','h2','h3','h4','h5','h6'];
+  if (!validHeadings.includes(headingLevel)) {
+    headingLevel = 'h2';
+  }
+
+  // Create project articles
+  projects.forEach((project) => {
+    const article = document.createElement('article');
+
+    article.innerHTML = `
+      <${headingLevel}>${project.title || 'Untitled Project'}</${headingLevel}>
+      <img src="${project.image || 'images/default.png'}" alt="${project.title || 'Project image'}">
+      <p>${project.description || 'No description available.'}</p>
+    `;
+
+    containerElement.appendChild(article);
+  });
+}
+
 
 
 
