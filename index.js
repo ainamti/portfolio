@@ -21,5 +21,4 @@ async function displayLatestProjects() {
 
 displayLatestProjects();
 
-renderProjects(latestProjects, projectsContainer, 'h2');
 <script src="index.js" type="module" defer></script>
