@@ -118,6 +118,8 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   });
 }
 
+renderProjects(projects, projectsContainer, 'h2');
+
 
 
 
