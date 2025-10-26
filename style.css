@@ -118,6 +118,13 @@ nav a:hover {
 }
 
 /*Projects Grid*/
+.projects img {
+  width: 250px;   
+  height: auto;   
+  border-radius: 10px; 
+  object-fit: cover;   
+}
+
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
