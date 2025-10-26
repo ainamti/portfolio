@@ -184,3 +184,23 @@ input, textarea, select {
 .color-scheme select {
   font: inherit; /* ensure the dropdown matches the site font */
 }
+
+#profile-stats {
+  margin-top: 1em;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5em;
+}
+
+.stats-grid dt {
+  font-weight: bold;
+  text-align: center;
+}
+
+.stats-grid dd {
+  text-align: center;
+  margin: 0;
+}
