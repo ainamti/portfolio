@@ -11,7 +11,6 @@ async function displayGitHubStats() {
 
   if (profileStats) {
     profileStats.innerHTML = `
-      <h2>GitHub Profile Stats</h2>
       <dl class="stats-grid">
         <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
         <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
