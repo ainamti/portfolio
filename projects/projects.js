@@ -17,6 +17,7 @@ let arc = arcGenerator({
 
 d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
+let colors = ['gold', 'purple'];
 let data = [1, 2];
 
 let total = 0;
@@ -42,8 +43,6 @@ arcs.forEach((arc, idx) => {
     .attr('d', arc)
     .attr('fill', colors[idx]); 
 });
-
-let colors = ['gold', 'purple'];
 
 
 
