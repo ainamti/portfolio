@@ -27,27 +27,6 @@ let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let query = '';
 let selectedIndex = -1;
 
-let svg = d3.select('svg');
-svg.selectAll('path').remove();
-arcs.forEach((arc, i) => {
-  svg.append('path')
-    .attr('d', arc)
-    .attr('fill', colors(i))
-    .on('click', () => {
-      // toggle selection
-      selectedIndex = selectedIndex === i ? -1 : i;
-
-      // update wedge classes
-      svg.selectAll('path')
-        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
-
-      // update legend classes
-      let legend = d3.select('.legend');
-      legend.selectAll('li')
-        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
-    });
-});
-
 
 arcData.forEach((d, idx) => {
   d3.select('#projects-pie-plot')
@@ -99,6 +78,25 @@ function renderPieChart(projectsGiven) {
       .attr('d', arcGenerator(d))
       .attr('fill', colors(idx));
   });
+
+  arcs.forEach((arc, i) => {
+  svg.append('path')
+    .attr('d', arc)
+    .attr('fill', colors(i))
+    .on('click', () => {
+      // toggle selection
+      selectedIndex = selectedIndex === i ? -1 : i;
+
+      // update wedge classes
+      svg.selectAll('path')
+        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
+
+      // update legend classes
+      let legend = d3.select('.legend');
+      legend.selectAll('li')
+        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
+    });
+});
 
   // Append legend
   data.forEach((d, idx) => {
