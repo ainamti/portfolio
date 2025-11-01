@@ -15,7 +15,10 @@ let arc = arcGenerator({
   endAngle: 2 * Math.PI,
 });
 
-d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
+d3.select('#projects-pie-plot')
+  .append('path')
+  .attr('d', arc)
+  .attr('fill', 'red');
 
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 let data = [
@@ -29,20 +32,6 @@ let data = [
 let sliceGenerator = d3.pie().value((d) => d.value);
 let arcData = sliceGenerator(data);
 let arcs = arcData.map((d) => arcGenerator(d));
-
-let total = 0;
-
-for (let d of data) {
-  total += d;
-}
-
-let angle = 0;
-
-for (let d of data) {
-  let endAngle = angle + (d / total) * 2 * Math.PI;
-  arcData.push({ startAngle: angle, endAngle });
-  angle = endAngle;
-}
 
 arcs.forEach((arc, idx) => {
   d3.select('#projects-pie-plot')
