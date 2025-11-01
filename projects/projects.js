@@ -27,22 +27,6 @@ let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let query = '';
 let selectedIndex = -1;
 
-
-arcData.forEach((d, idx) => {
-  d3.select('#projects-pie-plot')
-    .append('path')
-    .attr('d', arcGenerator(d))
-    .attr('fill', colors(idx));
-});
-
-let legend = d3.select('.legend');
-data.forEach((d, idx) => {
-  legend
-    .append('li')
-    .attr('style', `--color:${colors(idx)}`)
-    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-});
-
 function renderPieChart(projectsGiven) {
   // Clear previous paths and legend
   const svg = d3.select('#projects-pie-plot');
