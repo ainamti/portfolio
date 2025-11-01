@@ -191,10 +191,25 @@ margin: 0;
 
 #projects-pie-plot path {
   transition: opacity 300ms;
+  cursor: pointer;
 }
 
 #projects-pie-plot:has(path:hover) path:not(:hover) {
   opacity: 0.5;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important; 
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}
+
+.legend-item.selected {
+  font-weight: bold;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 4px;
 }
 
 /* Form Styling (CSS Grid)*/
