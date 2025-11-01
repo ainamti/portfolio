@@ -8,14 +8,15 @@ projectsTitle.textContent = `Projects (${projects.length})`;
 
 renderProjects(projects, projectsContainer, 'h2');
 
-let data = [
-  { value: 1, label: 'apples' },
-  { value: 2, label: 'oranges' },
-  { value: 3, label: 'mangos' },
-  { value: 4, label: 'pears' },
-  { value: 5, label: 'limes' },
-  { value: 5, label: 'cherries' },
-];
+let rolledData = d3.rollups(
+  projects,
+  (v) => v.length,
+  (d) => d.year,
+);
+
+let data = rolledData.map(([year, count]) => {
+  return { value: count, label: year };
+});
 
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
@@ -31,7 +32,6 @@ arcData.forEach((d, idx) => {
     .attr('fill', colors(idx));
 });
 
-// LEGEND
 let legend = d3.select('.legend');
 data.forEach((d, idx) => {
   legend
@@ -39,3 +39,5 @@ data.forEach((d, idx) => {
     .attr('style', `--color:${colors(idx)}`)
     .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
 });
+
+
