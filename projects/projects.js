@@ -56,39 +56,52 @@ function renderPieChart(projectsGiven) {
   const arcData = sliceGenerator(data);
   const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
-  // Append paths
   arcData.forEach((d, idx) => {
-    svg.append('path')
-      .attr('d', arcGenerator(d))
-      .attr('fill', colors(idx));
-  });
-
-  arcs.forEach((arc, i) => {
   svg.append('path')
-    .attr('d', arc)
-    .attr('fill', colors(i))
+    .attr('d', arcGenerator(d))
+    .attr('fill', colors(idx))
+    .attr('class', idx === selectedIndex ? 'selected' : '')
     .on('click', () => {
-      // toggle selection
-      selectedIndex = selectedIndex === i ? -1 : i;
+      selectedIndex = selectedIndex === idx ? -1 : idx;
 
-      // update wedge classes
+      // update wedges
       svg.selectAll('path')
-        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
+        .attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
 
-      // update legend classes
-      let legend = d3.select('.legend');
+      // update legend
       legend.selectAll('li')
-        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
+        .attr('class', (_, i) => i === selectedIndex ? 'legend-item selected' : 'legend-item');
+
+      // optional: filter projects when wedge is selected
+      const filteredProjects = selectedIndex !== -1
+        ? projects.filter(p => p.year === data[selectedIndex].label)
+        : projects;
+
+      renderProjects(filteredProjects, projectsContainer, 'h2');
     });
 });
 
-  // Append legend
-  data.forEach((d, idx) => {
-    legend.append('li')
-      .attr('class', 'legend-item')
-      .attr('style', `--color:${colors(idx)}`)
-      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-  });
+data.forEach((d, idx) => {
+  legend.append('li')
+    .attr('class', 'legend-item')
+    .attr('style', `--color:${colors(idx)}`)
+    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+    .on('click', () => {
+      selectedIndex = selectedIndex === idx ? -1 : idx;
+
+      svg.selectAll('path')
+        .attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
+
+      legend.selectAll('li')
+        .attr('class', (_, i) => i === selectedIndex ? 'legend-item selected' : 'legend-item');
+
+      const filteredProjects = selectedIndex !== -1
+        ? projects.filter(p => p.year === data[selectedIndex].label)
+        : projects;
+
+      renderProjects(filteredProjects, projectsContainer, 'h2');
+    });
+});
 }
 
 renderPieChart(projects);
