@@ -17,7 +17,7 @@ let arc = arcGenerator({
 
 d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
-let colors = ['gold', 'purple'];
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 let data = [1, 2, 3, 4, 5, 5];
 let sliceGenerator = d3.pie();
 let arcData = sliceGenerator(data);
