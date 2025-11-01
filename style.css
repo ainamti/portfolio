@@ -152,27 +152,41 @@ margin: 0;
 }
 
 /* Legend Styling */
+.pie-legend-container {
+  display: flex;
+  align-items: flex-start; /* vertically align pie and legend at top */
+  gap: 2em;                /* spacing between pie and legend */
+  flex-wrap: wrap;          /* allow stacking on smaller screens */
+}
+
+#projects-pie-plot {
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;           /* prevents shrinking on smaller screens */
+}
+
 .legend {
+  flex: 1;                  /* legend takes up remaining width */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-  gap: 1em; 
+  gap: 1em;
   list-style: none;
   padding: 0;
-  margin: 20px 0;
+  margin: 0;
 }
 
 .legend li {
   display: flex;
-  align-items: center; 
-  gap: 0.5em;          
+  align-items: center;
+  gap: 0.5em;
 }
 
 .legend .swatch {
-  display: inline-block; 
+  display: inline-block;
   width: 15px;
-  aspect-ratio: 1 / 1;    
-  background-color: var(--color); 
-  border-radius: 50%;      
+  aspect-ratio: 1 / 1;
+  background-color: var(--color);
+  border-radius: 50%;
 }
 
 /* Form Styling (CSS Grid)*/
