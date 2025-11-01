@@ -154,19 +154,19 @@ margin: 0;
 /* Legend Styling */
 .pie-legend-container {
   display: flex;
-  align-items: flex-start; /* vertically align pie and legend at top */
-  gap: 2em;                /* spacing between pie and legend */
-  flex-wrap: wrap;          /* allow stacking on smaller screens */
+  align-items: flex-start; 
+  gap: 2em;                
+  flex-wrap: wrap;         
 }
 
 #projects-pie-plot {
   width: 300px;
   height: 300px;
-  flex-shrink: 0;           /* prevents shrinking on smaller screens */
+  flex-shrink: 0;           
 }
 
 .legend {
-  flex: 1;                  /* legend takes up remaining width */
+  flex: 1;                  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
   gap: 1em;
@@ -187,6 +187,14 @@ margin: 0;
   aspect-ratio: 1 / 1;
   background-color: var(--color);
   border-radius: 50%;
+}
+
+#projects-pie-plot path {
+  transition: opacity 300ms;
+}
+
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
 }
 
 /* Form Styling (CSS Grid)*/
