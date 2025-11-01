@@ -24,6 +24,7 @@ let sliceGenerator = d3.pie().value(d => d.value);
 let arcData = sliceGenerator(data);
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+let query = '';
 
 arcData.forEach((d, idx) => {
   d3.select('#projects-pie-plot')
