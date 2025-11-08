@@ -173,16 +173,13 @@ function renderScatterPlot(data, commits) {
     .attr('fill', 'steelblue');
 }
 
-let data = await loadData();
-let commits = processCommits(data);
-
-renderScatterPlot(data, commits);
-
 // Main async function
 async function main() {
   const data = await loadData();
   const commits = processCommits(data);
+
   renderCommitInfo(data, commits);
+  renderScatterPlot(data, commits); // render scatterplot AFTER data is ready
 }
 
 // Run main
