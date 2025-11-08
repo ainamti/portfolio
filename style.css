@@ -14,6 +14,44 @@ body {
   margin-inline: max(1em, (100% - 100ch) / 2);
 }
 
+/* Stats container */
+.stats {
+  max-width: 500px;         /* Keep it readable */
+  margin: 1em auto;         /* Center it with some space */
+  padding: 1em;
+  background-color: #f9f9f9; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Each term (dt) */
+.stats dt {
+  font-weight: bold;
+  margin-top: 0.8em;
+  color: #333;
+}
+
+/* Each definition (dd) */
+.stats dd {
+  margin: 0 0 0.8em 1em;
+  color: #555;
+}
+
+/* Optional: highlight important numbers */
+.stats dd {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+/* Optional: responsive for smaller screens */
+@media (max-width: 600px) {
+  .stats {
+    max-width: 100%;
+    padding: 0.8em;
+  }
+}
+
 /*Resume Page Specific Styling*/
 
 main {
