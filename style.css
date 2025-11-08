@@ -81,6 +81,8 @@ dl.info {
   grid-template-columns: max-content auto; /* dt in 1st col, dd in 2nd */
   column-gap: 0.5em;
   margin: 0; /* remove default margins */
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
 dl.info dt {
@@ -90,6 +92,11 @@ dl.info dt {
 
 dl.info dd {
   margin: 0;                 /* remove default margins */
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Tooltip positioning */
