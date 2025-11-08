@@ -75,6 +75,46 @@ body {
   stroke: none;
 }
 
+/* Tooltip layout for <dl> elements */
+dl.info {
+  display: grid;
+  grid-template-columns: max-content auto; /* dt in 1st col, dd in 2nd */
+  column-gap: 0.5em;
+  margin: 0; /* remove default margins */
+}
+
+dl.info dt {
+  font-weight: normal;       /* make labels less prominent */
+  color: #555;               /* optional: slightly muted color */
+}
+
+dl.info dd {
+  margin: 0;                 /* remove default margins */
+}
+
+/* Tooltip positioning */
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background: rgba(255, 255, 255, 0.95); /* optional: slight background */
+  padding: 0.5em 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  pointer-events: none;       /* so it doesn’t block mouse events */
+}
+
+/* Dot hover styles for scatterplot */
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
 /*Resume Page Specific Styling*/
 
 main {
