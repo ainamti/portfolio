@@ -7,3 +7,4 @@ async function loadData() {
 }
 
 let data = await loadData();
+console.log(data[0]);
