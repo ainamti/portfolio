@@ -186,6 +186,75 @@ function renderScatterPlot(data, commits) {
       d3.select(event.currentTarget).style('fill-opacity', 0.7);
       updateTooltipVisibility(false);
     });
+
+    createBrushSelector(svg);
+}
+
+function createBrushSelector(svg) {
+  // Create brush and register event listener
+  svg.call(d3.brush().on('start brush end', brushed));
+
+  // Raise dots so they appear above the overlay
+  svg.selectAll('.dots, .overlay ~ *').raise();
+}
+
+function isCommitSelected(selection, commit) {
+  if (!selection) return false;
+  const [[x0, y0], [x1, y1]] = selection;
+  const x = xScale(commit.datetime);
+  const y = yScale(commit.hourFrac);
+  return x0 <= x && x <= x1 && y0 <= y && y <= y1;
+}
+
+function renderSelectionCount(selection) {
+  const selectedCommits = selection
+    ? commits.filter((d) => isCommitSelected(selection, d))
+    : [];
+  const countElement = document.querySelector('#selection-count');
+  countElement.textContent = `${
+    selectedCommits.length || 'No'
+  } commits selected`;
+  return selectedCommits;
+}
+
+function renderLanguageBreakdown(selection) {
+  const selectedCommits = selection
+    ? commits.filter((d) => isCommitSelected(selection, d))
+    : [];
+  const container = document.getElementById('language-breakdown');
+
+  if (selectedCommits.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const requiredCommits = selectedCommits.length ? selectedCommits : commits;
+  const lines = requiredCommits.flatMap((d) => d.lines);
+
+  const breakdown = d3.rollup(
+    lines,
+    (v) => v.length,
+    (d) => d.type,
+  );
+
+  container.innerHTML = '';
+  for (const [language, count] of breakdown) {
+    const proportion = count / lines.length;
+    const formatted = d3.format('.1~%')(proportion);
+    container.innerHTML += `
+      <dt>${language}</dt>
+      <dd>${count} lines (${formatted})</dd>
+    `;
+  }
+}
+
+function brushed(event) {
+  const selection = event.selection;
+  d3.selectAll('circle').classed('selected', (d) =>
+    isCommitSelected(selection, d),
+  );
+  renderSelectionCount(selection);
+  renderLanguageBreakdown(selection);
 }
 
 function renderTooltipContent(commit) {

@@ -14,6 +14,24 @@ body {
   margin-inline: max(1em, (100% - 100ch) / 2);
 }
 
+circle.selected {
+  fill: #ff6b6b;
+}
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
 /* Container for stats */
 #stats {
   display: grid;
@@ -42,7 +60,7 @@ body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Term (stat name) */
+/* Term */
 .stats dt {
   font-weight: 600;
   font-size: 0.9rem;
@@ -50,7 +68,7 @@ body {
   margin-bottom: 0.3rem;
 }
 
-/* Definition (stat value) */
+/* Definition */
 .stats dd {
   font-size: 1.6rem;
   font-weight: 700;
@@ -78,20 +96,20 @@ body {
 /* Tooltip layout for <dl> elements */
 dl.info {
   display: grid;
-  grid-template-columns: max-content auto; /* dt in 1st col, dd in 2nd */
+  grid-template-columns: max-content auto; 
   column-gap: 0.5em;
-  margin: 0; /* remove default margins */
+  margin: 0; 
   transition-duration: 500ms;
   transition-property: opacity, visibility;
 }
 
 dl.info dt {
-  font-weight: normal;       /* make labels less prominent */
-  color: #555;               /* optional: slightly muted color */
+  font-weight: normal;      
+  color: #555;              
 }
 
 dl.info dd {
-  margin: 0;                 /* remove default margins */
+  margin: 0;                
 }
 
 dl.info[hidden]:not(:hover, :focus-within) {
@@ -104,11 +122,11 @@ dl.info[hidden]:not(:hover, :focus-within) {
   position: fixed;
   top: 1em;
   left: 1em;
-  background: rgba(255, 255, 255, 0.95); /* optional: slight background */
+  background: rgba(255, 255, 255, 0.95); 
   padding: 0.5em 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
-  pointer-events: none;       /* so it doesn’t block mouse events */
+  pointer-events: none;       
 }
 
 /* Dot hover styles for scatterplot */
