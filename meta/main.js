@@ -95,21 +95,77 @@ function renderCommitInfo(data, commits) {
   dl.append('dd').text(maxPeriod);
 }
 
-function renderScatterPlot() {
-  // 1️⃣ Sort commits so large dots (big edits) are drawn first
-  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+function renderScatterPlot(data, commits) {
+  const width = 1000;
+  const height = 600;
 
-  // 2️⃣ Compute min and max edited lines across commits
-  const [minLines, maxLines] = d3.extent(sortedCommits, (d) => d.totalLines);
+  // Margins for axes
+  const margin = { top: 10, right: 10, bottom: 30, left: 50 };
 
-  // 3️⃣ Define a square root radius scale (for perceptual accuracy)
+  const usableArea = {
+    top: margin.top,
+    right: width - margin.right,
+    bottom: height - margin.bottom,
+    left: margin.left,
+    width: width - margin.left - margin.right,
+    height: height - margin.top - margin.bottom,
+  };
+
+  // Create SVG
+  const svg = d3
+    .select('#chart')
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .style('overflow', 'visible');
+
+  // Scales
+  const xScale = d3
+    .scaleTime()
+    .domain(d3.extent(commits, (d) => d.datetime))
+    .range([usableArea.left, usableArea.right])
+    .nice();
+
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, 24])
+    .range([usableArea.bottom, usableArea.top]);
+
+  // ➕ Step 1: Compute radius scale safely
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines || 0);
   const rScale = d3
     .scaleSqrt()
-    .domain([minLines, maxLines])
-    .range([2, 30]); // adjust if dots look too big/small
+    .domain([minLines ?? 0, maxLines ?? 1])
+    .range([2, 30]); // adjust range if dots are too big/small
 
-  // 4️⃣ Bind data and create circles
-  const dots = svg.select('.dots');
+  // Axes and gridlines
+  const gridlines = svg
+    .append('g')
+    .attr('class', 'gridlines')
+    .attr('transform', `translate(${usableArea.left}, 0)`);
+
+  gridlines.call(
+    d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width)
+  );
+
+  svg
+    .append('g')
+    .attr('transform', `translate(0, ${usableArea.bottom})`)
+    .call(d3.axisBottom(xScale));
+
+  svg
+    .append('g')
+    .attr('transform', `translate(${usableArea.left}, 0)`)
+    .call(
+      d3.axisLeft(yScale).tickFormat((d) =>
+        String(d % 24).padStart(2, '0') + ':00'
+      )
+    );
+
+  // Sort commits (so small dots are on top)
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+
+  // Draw dots
+  const dots = svg.append('g').attr('class', 'dots');
 
   dots
     .selectAll('circle')
@@ -117,20 +173,16 @@ function renderScatterPlot() {
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
-    .attr('r', (d) => rScale(d.totalLines))
+    .attr('r', (d) => rScale(d.totalLines || 0))
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
-      // Increase opacity when hovered
       d3.select(event.currentTarget).style('fill-opacity', 1);
-
-      // Update and show tooltip
       renderTooltipContent(commit);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
     .on('mouseleave', (event) => {
-      // Reset opacity and hide tooltip
       d3.select(event.currentTarget).style('fill-opacity', 0.7);
       updateTooltipVisibility(false);
     });
