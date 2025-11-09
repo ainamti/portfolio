@@ -189,6 +189,14 @@ function renderScatterPlot(data, commits) {
     renderLanguageBreakdown(selection);
   }
 
+  function createBrushSelector(svg) {
+  // Create brush and register event listener
+  svg.call(d3.brush().on('start brush end', brushed));
+
+  // Raise dots so they appear above the overlay
+  svg.selectAll('.dots, .overlay ~ *').raise();
+}
+
   // ➕ Step 1: Compute radius scale safely
   const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines || 0);
   const rScale = d3
@@ -247,14 +255,6 @@ function renderScatterPlot(data, commits) {
     });
 
     createBrushSelector(svg);
-}
-
-function createBrushSelector(svg) {
-  // Create brush and register event listener
-  svg.call(d3.brush().on('start brush end', brushed));
-
-  // Raise dots so they appear above the overlay
-  svg.selectAll('.dots, .overlay ~ *').raise();
 }
 
 function renderTooltipContent(commit) {
