@@ -4,14 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meta</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css"> 
+    <style>
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 10px;
+        }
+        .stat-container {
+            text-align: center;
+            padding: 0 15px;
+        }
+        .stat-value {
+            font-size: 32px; 
+            font-weight: bold;
+            color: #333;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 14px; 
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: -5px; 
+        }
+    </style>
 </head>
 
 <body>
     <h1>Meta</h1>
     <p>This page includes stats about the code of this website</p>
-    <div id="stats"></div>
+    
+    <div id="stats" class="stats-container">
+    </div>
 
+    <div style="display: flex; align-items: baseline; margin-bottom: 30px;">
+        <label for="commit-progress" style="flex: 1; margin-right: 20px;">
+            Show commits until:
+            <input
+                type="range"
+                id="commit-progress"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%;"
+            />
+        </label>
+        <time id="commit-time" style="margin-left: auto; font-weight: bold;"></time>
+    </div>
+
+    <dl id="files">
+      </dl>
+    
     <h2>Commits by time of day</h2>
     <div id="chart"></div>
 
@@ -28,7 +75,7 @@
       <dd id="commit-date"></dd>
 
       <dt>Time</dt>
-      <dd id="commit-time"></dd>
+      <dd id="commit-time-tooltip"></dd>
 
       <dt>Author</dt>
       <dd id="commit-author"></dd>
@@ -40,5 +87,6 @@
     <script src="../global.js" type="module"></script>
     <script type="module" src="main.js"></script>
 </body>
+</html>
 
 
