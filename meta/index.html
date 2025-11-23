@@ -1,92 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta</title>
-    <link rel="stylesheet" href="../style.css"> 
-    <style>
-        .stats-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 10px;
-        }
-        .stat-container {
-            text-align: center;
-            padding: 0 15px;
-        }
-        .stat-value {
-            font-size: 32px; 
-            font-weight: bold;
-            color: #333;
-            line-height: 1.2;
-        }
-        .stat-label {
-            font-size: 14px; 
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: -5px; 
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    #scrolly-1, #scrolly-2 {
+      display: flex;
+      gap: 1rem;          
+      margin-top: 2rem;
+    }
+
+    #scatter-story, #dot-story {
+      flex: 1;
+    }
+
+    #scatter-story .step, #dot-story .step {
+      min-height: 0vh;   
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    #scatter-plot, #dot-plot {
+      flex: 1;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    #scatter-plot p, #dot-plot p,
+    #scatter-plot dl, #dot-plot dl {
+      margin: 0.25rem 0;
+    }
+
+    @media (max-width: 800px) {
+      #scrolly-1, #scrolly-2 {
+        flex-direction: column;
+      }
+      #scatter-plot, #dot-plot {
+        position: relative;
+        height: auto;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Meta</h1>
-    <p>This page includes stats about the code of this website</p>
-    
-    <div id="stats" class="stats-container">
+  <h1>Meta</h1>
+  <p>This page includes stats about the code of this website</p>
+
+  <div id="stats" class="stats-container"></div>
+
+  <div style="display: flex; align-items: baseline; margin-bottom: 30px;">
+    <label for="commit-progress" style="flex: 1; margin-right: 20px;">
+      Show commits until:
+      <input type="range" id="commit-progress" min="0" max="100" value="100" style="width: 100%;" />
+    </label>
+    <time id="commit-time" style="margin-left: auto; font-weight: bold;"></time>
+  </div>
+
+  <div id="scrolly-1">
+    <div id="scatter-story"></div>
+    <div id="scatter-plot">
+      <h2>Commits by time of day</h2>
+      <div id="scatter-chart"></div>
+      <p id="scatter-selection-count">No commits selected</p>
+      <dl id="scatter-language-breakdown" class="stats"></dl>
     </div>
+  </div>
 
-    <div style="display: flex; align-items: baseline; margin-bottom: 30px;">
-        <label for="commit-progress" style="flex: 1; margin-right: 20px;">
-            Show commits until:
-            <input
-                type="range"
-                id="commit-progress"
-                min="0"
-                max="100"
-                value="100"
-                style="width: 100%;"
-            />
-        </label>
-        <time id="commit-time" style="margin-left: auto; font-weight: bold;"></time>
+  <div id="scrolly-2">
+    <div id="dot-story">
+      <div class="step" data-type="intro">
+        <h2>Codebase Evaluation</h2>
+      </div>
     </div>
+  </div>
 
-    <dl id="files">
-      </dl>
-    
-    <h2>Commits by time of day</h2>
-    <div id="chart"></div>
+  <dl id="commit-tooltip" class="info tooltip" hidden>
+    <dt>Commit</dt>
+    <dd><a href="" id="commit-link" target="_blank"></a></dd>
+    <dt>Date</dt>
+    <dd id="commit-date"></dd>
+    <dt>Time</dt>
+    <dd id="commit-time-tooltip"></dd>
+    <dt>Author</dt>
+    <dd id="commit-author"></dd>
+    <dt>Lines Edited</dt>
+    <dd id="commit-lines"></dd>
+  </dl>
 
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="stats"></dl>
-    
-    <dl id="commit-tooltip" class="info tooltip" hidden>
-      <dt>Commit</dt>
-      <dd>
-        <a href="" id="commit-link" target="_blank"></a>
-      </dd>
+  <dl id="files"></dl>
 
-      <dt>Date</dt>
-      <dd id="commit-date"></dd>
-
-      <dt>Time</dt>
-      <dd id="commit-time-tooltip"></dd>
-
-      <dt>Author</dt>
-      <dd id="commit-author"></dd>
-
-      <dt>Lines Edited</dt>
-      <dd id="commit-lines"></dd>
-    </dl>
-
-    <script src="../global.js" type="module"></script>
-    <script type="module" src="main.js"></script>
+  <script src="../global.js" type="module"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
+
+
 
 
